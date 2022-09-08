@@ -1,0 +1,29 @@
+{
+  "name": "my-mini-cli",
+  "version": "1.0.0",
+  "description": "小程序ci脚手架工具",
+  "main": "index.js",
+  "bin": {
+    "demo-cli": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [
+    "ci",
+    "mini-ci"
+  ],
+  "author": "baosisi",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/helper-module-imports": "^7.18.6",
+    "@babel/preset-env": "^7.19.0",
+    "@moyuyc/inquirer-autocomplete-prompt": "^1.3.2",
+    "chalk": "^4.1.2",
+    "commander": "^9.4.0",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^9.1.1",
+    "json-format": "^1.0.1"
+  }
+}
