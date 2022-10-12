@@ -1,10 +1,10 @@
 {
-  "name": "my-mini-cli",
-  "version": "1.0.0",
+  "name": "@bss/wx-mini-cli",
+  "version": "1.0.1",
   "description": "小程序ci脚手架工具",
   "main": "index.js",
   "bin": {
-    "demo-cli": "./index.js"
+    "mini-wechat-cli": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +16,7 @@
   ],
   "author": "baosisi",
   "license": "ISC",
+  "private": false,
   "dependencies": {
     "@babel/helper-module-imports": "^7.18.6",
     "@babel/preset-env": "^7.19.0",
