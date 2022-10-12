@@ -4,6 +4,7 @@ const packageJson = JSON.parse(fs.readFileSync('./package.json'))
 import { Command } from 'commander'
 import createProgram from './lib/creatFile.js'
 import publishWeApp from './lib/publishWeApp.js'
+import openWeApp from './lib/openWeApp.js'
 import Config from './config.js'
 import Utils from './utils/index.js'
 import Log from './log.js'
@@ -12,17 +13,19 @@ import chalk from 'chalk'
 const program = new Command();
 
 let userConf = null
+
 // 设置版本号
 program.version(packageJson.version, '-v, --version');
 program.command('create').description('创建页面或组件').action((cmd, op) => createProgram(cmd))
-program.command('publish').description('发布体验版').action((cmd, op) => publishWeApp(getUserConf()) )
+program.command('open').description('打开开发者工具').action(async (cmd, op) => openWeApp(await getUserConf()))
+program.command('publish').description('发布体验版').action(async(cmd, op) => publishWeApp(await getUserConf()) )
 // 自定义指令
 program
     .command('run <cmd>')
-    .description('当前<cmd>包含: ' + getCustomScriptsDesc(getUserConf({level: 1})))
+    .description('当前<cmd>包含: ' + getCustomScriptsDesc(await getUserConf({level: 1})))
     .action(async (cmd, options) => {
         // 当前命令
-        let curScript = getUserConf().customScripts.find((el, idx) => el.name === cmd);
+        let curScript = (await getUserConf()).customScripts.find((el, idx) => el.name === cmd);
 
         // 执行回调
         await curScript.callback.call(originPrototype, cmd, options);
@@ -36,18 +39,17 @@ function setConfig(param) {
     Config.output = path.resolve(path.join(Config.dir_root, param.output || param.entry || ''));
 }
 async function getUserConf({level = 2} = {}) {
-    const userConfPath = `${Config.dir_root}/xdk.config.js`
+    const userConfPath = `${Config.dir_root}/ci.config.js`
     if (!Utils.checkFileExist(userConfPath)) {
         if (level == 2) {
-            Log.err('当前项目尚未创建xdk.config.js文件');
+            Log.err('当前项目尚未创建ci.config.js文件');
             return process.exit(1);
         } else {
             return null
         }
-        
     }
 
-    let data = userConf = await import(userConfPath)
+    let data = userConf = (await import(userConfPath)).default
     if (!!data.template) {
         Config.template = path.resolve(path.join(Config.dir_root, data.template))
     }

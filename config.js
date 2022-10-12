@@ -3,7 +3,6 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __filenameNew = fileURLToPath(import.meta.url)
-
 const __dirnameNew = path.dirname(__filenameNew)
 export default {
     // 被执行js文件的绝对路径

@@ -41,7 +41,7 @@ export default {
     },
   
     // 自定义命令
-    // 自定义指令需要用 run 来执行，例如 xdk-cli run dev
+    // 自定义指令需要用 run 来执行，例如 ci-cli run dev
     customScripts: [
         {
             name: 'dev',
