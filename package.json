@@ -1,6 +1,6 @@
 {
-  "name": "@bss/wx-mini-cli",
-  "version": "1.0.1",
+  "name": "@baosisi07/wx-mini-cli",
+  "version": "1.0.0",
   "description": "小程序ci脚手架工具",
   "main": "index.js",
   "bin": {
@@ -12,7 +12,8 @@
   "type": "module",
   "keywords": [
     "ci",
-    "mini-ci"
+    "mini-ci",
+    "miniprogram-ci"
   ],
   "author": "baosisi",
   "license": "ISC",
