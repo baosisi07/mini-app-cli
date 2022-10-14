@@ -1,6 +1,6 @@
 #!/usr/bin/env babel-node
 import fs from 'fs'
-const packageJson = JSON.parse(fs.readFileSync('./package.json'))
+
 import { Command } from 'commander'
 import createProgram from './lib/creatFile.js'
 import publishWeApp from './lib/publishWeApp.js'
@@ -12,6 +12,8 @@ import Log from './log.js'
 import path from 'path'
 import chalk from 'chalk'
 const program = new Command();
+const packagePath = path.resolve(path.join(Config.root, './package.json'))
+const packageJson = JSON.parse(fs.readFileSync(packagePath))
 
 let userConf = null
 
