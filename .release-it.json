@@ -4,6 +4,7 @@
     },
     "github": {
       "release": true,
+      "tokenRef": "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",
       "releaseName": "v${version}"
     },
     "plugins": {
