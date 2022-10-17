@@ -7,7 +7,7 @@
     "mini-wechat-cli": "./index.js"
   },
   "scripts": {
-    "release": "release-it",
+    "release": "dotenv release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
@@ -30,5 +30,8 @@
     "minimist": "^1.2.7",
     "miniprogram-ci": "^1.8.35",
     "release-it": "^15.5.0"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^6.0.0"
   }
 }

@@ -8,7 +8,7 @@
     },
     "github": {
       "release": true,
-      "web": true,
+      "tokenRef": "GITHUB_TOKEN",
       "releaseName": "v${version}"
     }
   }
