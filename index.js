@@ -2,6 +2,7 @@
 import fs from 'fs'
 import minimist from 'minimist'
 import createProgram from './lib/creatFile.js'
+import createConfig from './lib/creatConfig.js'
 import publishWeApp from './lib/publishWeApp.js'
 import openWeApp from './lib/openWeApp.js'
 import previewWeApp from './lib/previewWeApp.js'
@@ -17,8 +18,8 @@ let userConf = null
 
 const args = minimist(process.argv.slice(2), {
     alias: {
-      version: ['v'],
-      help: ['h'],
+        version: ['v'],
+        help: ['h'],
     },
     boolean: ['version', 'help']
 })
@@ -28,6 +29,7 @@ if (args.version) {
     console.log(chalk.green(packageJson.version))
 }
 if (args.help) {
+    console.log(chalk.green('mini-wechat-cli init 初始化配置文件'))
     console.log(chalk.green('mini-wechat-cli create 创建页面或组件模版'))
     console.log(chalk.green('mini-wechat-cli open 在微信开发工具打开项目'))
     console.log(chalk.green('mini-wechat-cli preview 生成预览二维码 会显示在小程序助手'))
@@ -35,15 +37,18 @@ if (args.help) {
 }
 const command = _[0]
 switch (command) {
+    case 'init':
+        createConfig()
+        break;
     case 'create':
         createProgram(await getUserConf())
         break;
     case 'open':
         openWeApp(await getUserConf())
-    break;
+        break;
     case 'preview':
         previewWeApp(await getUserConf())
-    break;
+        break;
     case 'publish':
         publishWeApp(await getUserConf())
         break;
@@ -51,12 +56,12 @@ switch (command) {
 
 function setConfig(param) {
     // 小程序入口目录
-    Config.entry  = path.resolve(path.join(Config.dir_root, param.entry || ''));
+    Config.entry = path.resolve(path.join(Config.dir_root, param.entry || ''));
 
     // 小程序输出目录
     Config.output = path.resolve(path.join(Config.dir_root, param.output || param.entry || ''));
 }
-async function getUserConf({level = 2} = {}) {
+async function getUserConf({ level = 2 } = {}) {
     let userConfPath = `${Config.dir_root}/ci.config.js`
     if (!Utils.checkFileExist(userConfPath)) {
         userConfPath = `${Config.dir_root}/ci.config.mjs`
